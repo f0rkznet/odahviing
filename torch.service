@@ -1,0 +1,8 @@
+[Unit]
+Description=torch
+
+[Service]
+ExecStart=python3 /opt/odahviing/main.py &
+
+[Install]
+WantedBy=default.target
