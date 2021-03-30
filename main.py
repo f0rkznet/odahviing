@@ -24,7 +24,7 @@ def fire_cycle(heat):
     for pixel in range(num_pixels):
         pixels[pixel] = random.choice(heat)
         pixels.show()
-        time.sleep(random.choice(0, 0.25, 0.5, 0.75))
+        time.sleep(random.choice([0, 0.25]))#, 0.5, 0.75]))
 
 if __name__ == '__main__':
     while True:
