@@ -74,6 +74,8 @@ def get_port_heat(port):
         return('medium')
     elif in_rate <= 1000 and in_rate > 500:
         return('high')
+    else:
+        return('high')
 
 if __name__ == '__main__':
     while True:
