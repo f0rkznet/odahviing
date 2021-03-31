@@ -67,6 +67,7 @@ def get_port_heat(port):
     port_data = r.json()
     port_data = port_data['port'][0]
     if_speed = port_data['ifSpeed']
+    print(port_data['ifInOctets_rate'])
 
     in_rate = port_data['ifInOctets_rate'] * 8 / if_speed
 
