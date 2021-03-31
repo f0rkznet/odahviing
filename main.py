@@ -68,6 +68,7 @@ def get_port_heat(port):
     port_data = port_data['port'][0]
 
     in_rate = port_data['ifInOctets_rate'] / 1000
+    print(in_rate)
     if in_rate <= 100:
         return('low')
     elif in_rate <= 500 and in_rate > 100:
