@@ -2,6 +2,7 @@
 Description=torch
 
 [Service]
+EnvironmentFile=/etc/odahviing
 ExecStart=python3 /opt/odahviing/main.py &
 
 [Install]
