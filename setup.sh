@@ -3,7 +3,7 @@
 apt update -yq &&
 apt install -y python3 python3-pip git
 
-pip3 install -r requirements.txt
+sudo apt-get install -y python3-numpy
 
 sudo pip3 install rpi_ws281x adafruit-circuitpython-neopixel
 sudo python3 -m pip install --force-reinstall adafruit-blinka
