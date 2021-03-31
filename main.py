@@ -18,23 +18,38 @@ pixels = neopixel.NeoPixel(
 heatmap = {
     'low': [
         (0,0,0),
-        (190, 219, 57),
-        (168, 197, 69),
-        (189, 214, 132),
-        (150, 202, 45),
-        (40, 153, 118),
+        (0, 38, 28),
+        (22, 128, 57),
+        (69, 191, 85),
+        (150, 237, 137),
         (0,255,0),
     ],
-    'medium': [(0,0,0), (0,0,255)],
-    'high': [(0,0,0), (255,0,0)],
+    'medium': [
+        (0,0,0),
+        (0, 48, 90),
+        (0, 75, 141),
+        (0, 116, 217),
+        (65, 146, 217),
+        (122, 186, 242),
+        (0,0,255),
+    ],
+    'high': [
+        (0,0,0),
+        (69, 0, 3),
+        (92, 0, 2),
+        (148, 9, 13),
+        (212, 13, 18),
+        (255, 29, 35),
+        (255,0,0),
+    ],
 }
 
 def fire_cycle(heat):
     for pixel in range(num_pixels):
         pixels[pixel] = random.choice(heat)
         pixels.show()
-        time.sleep(random.choice(np.arange(0.0, 1.0, 0.01)))
+        time.sleep(random.choice(np.arange(0.0, 0.5, 0.01)))
 
 if __name__ == '__main__':
     while True:
-        fire_cycle(heat=heatmap['low'])
+        fire_cycle(heat=heatmap['medium'])
