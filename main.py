@@ -69,7 +69,7 @@ def get_port_heat(port):
     if_speed = port_data['ifSpeed']
     print(port_data['ifInOctets_rate'])
 
-    in_rate = port_data['ifInOctets_rate'] * 8 / if_speed
+    in_rate = port_data['ifInOctets_rate'] * 8 / if_speed * 100
 
     print('{} Mbit/s'.format(in_rate))
     if in_rate <= 100:
