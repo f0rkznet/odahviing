@@ -63,7 +63,7 @@ def get_port_heat(port):
     )
     headers = {'X-Auth-Token': LIBRENMS_TOKEN}
     r = requests.get(url=request_uri, headers=headers)
-    print(r.json)
+    print(r.json())
 
 if __name__ == '__main__':
     while True:
