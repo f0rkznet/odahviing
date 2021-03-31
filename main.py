@@ -3,6 +3,12 @@ import board
 import neopixel
 import random
 import numpy as np
+import os
+import requests
+
+LIBRENMS_URL   = os.environ.get('LIBRENMS_URL', None)
+LIBRENMS_TOKEN = os.environ.get('LIBRENMS_TOKEN', None)
+LIBRENMS_PORT  = os.environ.get('LIBRENMS_PORT', None)
 
 pixel_pin = board.D18
 num_pixels = 12
@@ -50,6 +56,16 @@ def fire_cycle(heat):
         pixels.show()
         time.sleep(random.choice(np.arange(0.0, 0.5, 0.01)))
 
+def get_port_heat(port):
+    request_uri = '{}api/v0/ports/{}'.format(
+        LIBRENMS_URL,
+        port
+    )
+    headers = {'X-Auth-Token': LIBRENMS_TOKEN}
+    r = requests.get(url=request_uri, headers=headers)
+    print(r.json)
+
 if __name__ == '__main__':
     while True:
+        heat = get_port_heat(LIBRENMS_PORT)
         fire_cycle(heat=heatmap['medium'])
