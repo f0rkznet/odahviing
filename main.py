@@ -66,9 +66,11 @@ def get_port_heat(port):
 
     port_data = r.json()
     port_data = port_data['port'][0]
+    if_speed = port_data['ifSpeed']
 
-    in_rate = port_data['ifInOctets_rate'] / 1000
-    print(in_rate)
+    in_rate = port_data['ifInOctets_rate'] * 8 / if_speed
+
+    print('{} Mbit/s'.format(in_rate))
     if in_rate <= 100:
         return('low')
     elif in_rate <= 500 and in_rate > 100:
