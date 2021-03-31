@@ -63,9 +63,19 @@ def get_port_heat(port):
     )
     headers = {'X-Auth-Token': LIBRENMS_TOKEN}
     r = requests.get(url=request_uri, headers=headers)
-    print(r.json())
+
+    port_data = r.json()
+    port_data = port_data['port'][0]
+
+    in_rate = port_data['ifInOctets_rate'] / 1000
+    if in_rate <= 100:
+        return('low')
+    elif in_rate <= 500 and in_rate > 100:
+        return('medium')
+    elif in_rate <= 1000 and in_rate > 500:
+        return('high')
 
 if __name__ == '__main__':
     while True:
         heat = get_port_heat(LIBRENMS_PORT)
-        fire_cycle(heat=heatmap['medium'])
+        fire_cycle(heat=heatmap[heat])
