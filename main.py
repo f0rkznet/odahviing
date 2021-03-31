@@ -95,17 +95,16 @@ def get_port_heat(port):
     port_data = r.json()
     port_data = port_data['port'][0]
     if_speed = port_data['ifSpeed']
-    print(port_data['ifInOctets_rate'])
 
     in_rate = port_data['ifInOctets_rate'] * 8 / if_speed * 100
 
-    print('{} Mbit/s'.format(in_rate))
-    if in_rate <= 100:
+    if in_rate <= 33:
         return('low')
-    elif in_rate <= 500 and in_rate > 100:
+    elif in_rate <= 66 and in_rate > 33:
         return('medium')
-    elif in_rate <= 1100 and in_rate > 500:
+    elif in_rate <= 100 and in_rate > 66:
         return('high')
+
 if __name__ == '__main__':
     while True:
         rainbow_cycle()
