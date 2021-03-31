@@ -2,6 +2,8 @@
 Description=torch
 
 [Service]
+Restart=on-failure
+RestartSec=5s
 EnvironmentFile=/etc/odahviing
 ExecStart=python3 /opt/odahviing/main.py &
 
