@@ -50,6 +50,13 @@ heatmap = {
     ],
 }
 
+def rainbow_cycle():
+    for j in range(255):
+        for i in range(num_pixels):
+            pixel_index = (i * 256 // num_pixels) + j
+            pixels[i] = wheel(pixel_index & 255)
+        pixels.show()
+
 def fire_cycle(heat):
     for pixel in range(num_pixels):
         pixels[pixel] = random.choice(heat)
@@ -80,5 +87,6 @@ def get_port_heat(port):
         return('high')
 if __name__ == '__main__':
     while True:
+        rainbow_cycle()
         heat = get_port_heat(LIBRENMS_PORT)
         fire_cycle(heat=heatmap[heat])
