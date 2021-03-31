@@ -73,11 +73,8 @@ def get_port_heat(port):
         return('low')
     elif in_rate <= 500 and in_rate > 100:
         return('medium')
-    elif in_rate <= 1000 and in_rate > 500:
+    elif in_rate <= 1100 and in_rate > 500:
         return('high')
-    else:
-        return('high')
-
 if __name__ == '__main__':
     while True:
         heat = get_port_heat(LIBRENMS_PORT)
