@@ -37,25 +37,6 @@ def blue_dragon(pos):
         pos -= 170
         r = 0
         g = 0
-        b = int(pos * 3)
-    return (r, g, b) if ORDER in (neopixel.RGB, neopixel.GRB) else (r, g, b, 0)
-
-def earth_dragon(pos):
-    if pos < 0 or pos > 255:
-        r = g = b = 0
-    elif pos < 85:
-        r = 0
-        g = int(255 - pos * 3)
-        b = int(pos * 3)
-    elif pos < 170:
-        pos -= 85
-        r = 0
-        g = int(pos * 3)
-        b = int(255 - pos * 3)
-    else:
-        pos -= 170
-        r = 0
-        g = int(pos * 3)
         b = 0
     return (r, g, b) if ORDER in (neopixel.RGB, neopixel.GRB) else (r, g, b, 0)
 
@@ -132,7 +113,7 @@ def blue_cycle():
             pixels[i] = blue_dragon(pixel_index & 255)
         pixels.show()
 
-def fire_cycle():
+def red_cycle():
     for j in range(255):
         for i in range(num_pixels):
             pixel_index = (i * 256 // num_pixels) + j
@@ -146,13 +127,6 @@ def green_cycle():
             pixels[i] = green_dragon(pixel_index & 255)
         pixels.show()
 
-def earth_cycle():
-    for j in range(255):
-        for i in range(num_pixels):
-            pixel_index = (i * 256 // num_pixels) + j
-            pixels[i] = earth_dragon(pixel_index & 255)
-        pixels.show()
-
 def get_port_heat(port):
     request_uri = '{}api/v0/ports/{}'.format(
         LIBRENMS_URL,
@@ -160,6 +134,7 @@ def get_port_heat(port):
     )
     headers = {'X-Auth-Token': LIBRENMS_TOKEN}
     r = requests.get(url=request_uri, headers=headers)
+    print(r.json())
 
     port_data = r.json()
     port_data = port_data['port'][0]
@@ -167,40 +142,22 @@ def get_port_heat(port):
 
     in_rate = port_data['ifInOctets_rate'] * 8 / if_speed * 100
 
-    if in_rate <= 33:
-        return('low')
-    elif in_rate <= 66 and in_rate > 33:
-        return('medium')
-    elif in_rate <= 100 and in_rate > 66:
-        return('high')
+    if in_rate <= 25:
+        return(green_cycle())
+    elif in_rate <= 50 and in_rate > 25:
+        return(blue_cycle())
+    elif in_rate <= 75 and in_rate > 50:
+        return(chromatic_cycle())
+    elif in_rate <= 100 and in_rate > 75:
+        return(red_cycle())
 
 if __name__ == '__main__':
     while True:
+        bandwidth_in = get_port_heat(LIBRENMS_PORT)
+
         # rainbow_cycle()
         # heat = get_port_heat(LIBRENMS_PORT)
         # fire_cycle(heat=heatmap[heat])
         # ice_cycle()
         # fire_cycle()
         # green_cycle()
-        for i in range(10):
-            green_cycle()
-        pixels.fill((0,0,0))
-        pixels.show()
-        time.sleep(2)
-        for i in range(10):
-            earth_cycle()
-        pixels.fill((0,0,0))
-        pixels.show()
-        time.sleep(2)
-        for i in range(10):
-            chromatic_cycle()
-        pixels.fill((0,0,0))
-        pixels.show()
-        time.sleep(2)
-        for i in range(10):
-            blue_cycle()
-        pixels.fill((0,0,0))
-        pixels.show()
-        time.sleep(2)
-        for i in range(10):
-            fire_cycle()
