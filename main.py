@@ -102,6 +102,7 @@ def ice_cycle():
         for i in range(num_pixels):
             pixel_index = (i * 256 // num_pixels) + j
             pixels[i] = ice_dragon(pixel_index & 255)
+        pixels.show()
 
 def fire_cycle(heat):
     for pixel in range(num_pixels):
