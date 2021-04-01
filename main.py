@@ -153,6 +153,6 @@ if __name__ == '__main__':
         # rainbow_cycle()
         # heat = get_port_heat(LIBRENMS_PORT)
         # fire_cycle(heat=heatmap[heat])
-        #ice_cycle()
-        #fire_cycle()
+        # ice_cycle()
+        # fire_cycle()
         green_cycle()
