@@ -55,8 +55,8 @@ def earth_dragon(pos):
     else:
         pos -= 170
         r = 0
-        g = int(255 - pos * 3)
-        b = int(pos * 3)
+        g = int(pos * 3)
+        b = 0
     return (r, g, b) if ORDER in (neopixel.RGB, neopixel.GRB) else (r, g, b, 0)
 
 def green_dragon(pos):
