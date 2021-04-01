@@ -142,22 +142,19 @@ def get_port_heat(port):
 
     in_rate = port_data['ifInOctets_rate'] * 8 / if_speed * 100
 
-    if in_rate <= 25:
-        return(green_cycle())
-    elif in_rate <= 50 and in_rate > 25:
-        return(blue_cycle())
-    elif in_rate <= 75 and in_rate > 50:
-        return(chromatic_cycle())
-    elif in_rate <= 100 and in_rate > 75:
-        return(red_cycle())
+    return in_rate
+
 
 if __name__ == '__main__':
     while True:
         bandwidth_in = get_port_heat(LIBRENMS_PORT)
+        for range(10)
+            if in_rate <= 25:
+                return(green_cycle())
+            elif in_rate <= 50 and in_rate > 25:
+                return(blue_cycle())
+            elif in_rate <= 75 and in_rate > 50:
+                return(chromatic_cycle())
+            elif in_rate <= 100 and in_rate > 75:
+                return(red_cycle())
 
-        # rainbow_cycle()
-        # heat = get_port_heat(LIBRENMS_PORT)
-        # fire_cycle(heat=heatmap[heat])
-        # ice_cycle()
-        # fire_cycle()
-        # green_cycle()
