@@ -50,7 +50,7 @@ heatmap = {
     ],
 }
 
-def ice_dragon(pos):
+def blue_dragon(pos):
     if pos < 0 or pos > 255:
         r = g = b = 0
     elif pos < 85:
@@ -69,9 +69,30 @@ def ice_dragon(pos):
         b = int(pos * 3)
     return (r, g, b) if ORDER in (neopixel.RGB, neopixel.GRB) else (r, g, b, 0)
 
-def rainbow_dragon(pos):
+def green_dragon(pos):
+
+def red_dragon(pos):
     # Input a value 0 to 255 to get a color value.
     # The colours are a transition r - g - b - back to r.
+    if pos < 0 or pos > 255:
+        r = g = b = 0
+    elif pos < 85:
+        r = int(pos * 3)
+        g = 0
+        b = 0
+    elif pos < 170:
+        pos -= 85
+        r = int(pos * 3)
+        g = 0
+        b = 0
+    else:
+        pos -= 170
+        r = int(pos * 3)
+        g = 0
+        b = 0
+    return (r, g, b) if ORDER in (neopixel.RGB, neopixel.GRB) else (r, g, b, 0)
+
+def chromatic_dragon(pos):
     if pos < 0 or pos > 255:
         r = g = b = 0
     elif pos < 85:
@@ -101,14 +122,15 @@ def ice_cycle():
     for j in range(255):
         for i in range(num_pixels):
             pixel_index = (i * 256 // num_pixels) + j
-            pixels[i] = ice_dragon(pixel_index & 255)
+            pixels[i] = blue_dragon(pixel_index & 255)
         pixels.show()
 
 def fire_cycle(heat):
-    for pixel in range(num_pixels):
-        pixels[pixel] = random.choice(heat)
+    for j in range(255):
+        for i in range(num_pixels):
+            pixel_index = (i * 256 // num_pixels) + j
+            pixels[i] = red_dragon(pixel_index & 255)
         pixels.show()
-        time.sleep(random.choice(np.arange(0.0, 0.5, 0.01)))
 
 def get_port_heat(port):
     request_uri = '{}api/v0/ports/{}'.format(
@@ -136,4 +158,5 @@ if __name__ == '__main__':
         # rainbow_cycle()
         # heat = get_port_heat(LIBRENMS_PORT)
         # fire_cycle(heat=heatmap[heat])
-        ice_cycle()
+        #ice_cycle()
+        fire_cycle()
