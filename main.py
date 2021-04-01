@@ -80,12 +80,12 @@ def red_dragon(pos):
         b = 0
     elif pos < 170:
         pos -= 85
-        r = int(pos * 3)
+        r = int(255 - pos * 3)
         g = 0
         b = 0
     else:
         pos -= 170
-        r = int(pos * 3)
+        r = 0
         g = 0
         b = 0
     return (r, g, b) if ORDER in (neopixel.RGB, neopixel.GRB) else (r, g, b, 0)
