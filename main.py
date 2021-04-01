@@ -147,7 +147,7 @@ def get_port_heat(port):
 
 if __name__ == '__main__':
     while True:
-        bandwidth_in = get_port_heat(LIBRENMS_PORT)
+        in_rate = get_port_heat(LIBRENMS_PORT)
         for _ in range(10):
             if in_rate <= 25:
                 green_cycle()
