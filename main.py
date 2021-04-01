@@ -122,7 +122,7 @@ def chromatic_cycle():
     for j in range(255):
         for i in range(num_pixels):
             pixel_index = (i * 256 // num_pixels) + j
-            pixels[i] = rainbow_dragon(pixel_index & 255)
+            pixels[i] = chromatic_dragon(pixel_index & 255)
         pixels.show()
 
 def ice_cycle():
