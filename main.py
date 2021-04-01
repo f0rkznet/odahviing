@@ -69,8 +69,6 @@ def blue_dragon(pos):
         b = int(pos * 3)
     return (r, g, b) if ORDER in (neopixel.RGB, neopixel.GRB) else (r, g, b, 0)
 
-def green_dragon(pos):
-
 def red_dragon(pos):
     # Input a value 0 to 255 to get a color value.
     # The colours are a transition r - g - b - back to r.
