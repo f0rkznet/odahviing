@@ -183,6 +183,11 @@ if __name__ == '__main__':
         # fire_cycle()
         # green_cycle()
         for i in range(10):
+            green_cycle()
+        pixels.fill((0,0,0))
+        pixels.show()
+        time.sleep(2)
+        for i in range(10):
             earth_cycle()
         pixels.fill((0,0,0))
         pixels.show()
