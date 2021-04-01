@@ -26,6 +26,25 @@ def blue_dragon(pos):
         r = g = b = 0
     elif pos < 85:
         r = 0
+        g = 0
+        b = int(pos * 3)
+    elif pos < 170:
+        pos -= 85
+        r = 0
+        g = 0
+        b = int(255 - pos * 3)
+    else:
+        pos -= 170
+        r = 0
+        g = 0
+        b = int(pos * 3)
+    return (r, g, b) if ORDER in (neopixel.RGB, neopixel.GRB) else (r, g, b, 0)
+
+def earth_dragon(pos):
+    if pos < 0 or pos > 255:
+        r = g = b = 0
+    elif pos < 85:
+        r = 0
         g = int(255 - pos * 3)
         b = int(pos * 3)
     elif pos < 170:
@@ -127,6 +146,13 @@ def green_cycle():
             pixels[i] = green_dragon(pixel_index & 255)
         pixels.show()
 
+def earth_cycle():
+    for j in range(255):
+        for i in range(num_pixels):
+            pixel_index = (i * 256 // num_pixels) + j
+            pixels[i] = earth_dragon(pixel_index & 255)
+        pixels.show()
+
 def get_port_heat(port):
     request_uri = '{}api/v0/ports/{}'.format(
         LIBRENMS_URL,
@@ -155,4 +181,21 @@ if __name__ == '__main__':
         # fire_cycle(heat=heatmap[heat])
         # ice_cycle()
         # fire_cycle()
-        green_cycle()
+        # green_cycle()
+        for i in range(10):
+            earth_cycle()
+        pixels.fill((0,0,0))
+        pixels.show()
+        sleep(2)
+        for i in range(10):
+            chromatic_cycle()
+        pixels.fill((0,0,0))
+        pixels.show()
+        sleep(2)
+        for i in range(10):
+            blue_cycle()
+        pixels.fill((0,0,0))
+        pixels.show()
+        sleep(2)
+        for i in range(10):
+            fire_cycle()
