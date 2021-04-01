@@ -50,7 +50,26 @@ heatmap = {
     ],
 }
 
-def wheel(pos):
+def ice_dragon(pos):
+    if pos < 0 or pos > 255:
+        r = g = b = 0
+    elif pos < 85:
+        r = 0
+        g = int(255 - pos * 3)
+        b = int(pos * 3)
+    elif pos < 170:
+        pos -= 85
+        r = 0
+        g = int(pos * 3)
+        b = int(255 - pos * 3)
+    else:
+        pos -= 170
+        r = 0
+        g = int(255 - pos * 3)
+        b = int(pos * 3)
+    return (r, g, b) if ORDER in (neopixel.RGB, neopixel.GRB) else (r, g, b, 0)
+
+def rainbow_dragon(pos):
     # Input a value 0 to 255 to get a color value.
     # The colours are a transition r - g - b - back to r.
     if pos < 0 or pos > 255:
@@ -75,8 +94,14 @@ def rainbow_cycle():
     for j in range(255):
         for i in range(num_pixels):
             pixel_index = (i * 256 // num_pixels) + j
-            pixels[i] = wheel(pixel_index & 255)
+            pixels[i] = rainbow_dragon(pixel_index & 255)
         pixels.show()
+
+def ice_cycle():
+    for j in range(255):
+        for i in range(num_pixels):
+            pixel_index = (i * 256 // num_pixels) + j
+            pixels[i] = ice_dragon(pixel_index & 255)
 
 def fire_cycle(heat):
     for pixel in range(num_pixels):
@@ -107,6 +132,7 @@ def get_port_heat(port):
 
 if __name__ == '__main__':
     while True:
-        rainbow_cycle()
-        heat = get_port_heat(LIBRENMS_PORT)
-        fire_cycle(heat=heatmap[heat])
+        # rainbow_cycle()
+        # heat = get_port_heat(LIBRENMS_PORT)
+        # fire_cycle(heat=heatmap[heat])
+        ice_cycle()
