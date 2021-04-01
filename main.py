@@ -150,11 +150,11 @@ if __name__ == '__main__':
         bandwidth_in = get_port_heat(LIBRENMS_PORT)
         for _ in range(10):
             if in_rate <= 25:
-                return(green_cycle())
+                green_cycle()
             elif in_rate <= 50 and in_rate > 25:
-                return(blue_cycle())
+                blue_cycle()
             elif in_rate <= 75 and in_rate > 50:
-                return(chromatic_cycle())
+                chromatic_cycle()
             elif in_rate <= 100 and in_rate > 75:
-                return(red_cycle())
+                red_cycle()
 
