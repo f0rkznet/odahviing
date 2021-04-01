@@ -46,17 +46,17 @@ def green_dragon(pos):
     elif pos < 85:
         r = 0
         g = int(pos * 3)
-        b = int(255 - pos * 3)
+        b = 0
     elif pos < 170:
         pos -= 85
         r = 0
         g = int(255 - pos * 3)
-        b = int(pos * 3)
+        b = 0
     else:
         pos -= 170
         r = 0
-        g = int(pos * 3)
-        b = int(255 - pos * 3)
+        g = 0
+        b = 0
     return (r, g, b) if ORDER in (neopixel.RGB, neopixel.GRB) else (r, g, b, 0)
 
 def red_dragon(pos):
@@ -153,6 +153,6 @@ if __name__ == '__main__':
         # rainbow_cycle()
         # heat = get_port_heat(LIBRENMS_PORT)
         # fire_cycle(heat=heatmap[heat])
-        ice_cycle()
+        #ice_cycle()
         #fire_cycle()
-        # green_cycle()
+        green_cycle()
