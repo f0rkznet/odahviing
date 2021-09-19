@@ -145,7 +145,7 @@ def get_port_heat(port):
     return in_rate
 
 def get_rate(netdata_host, chart):
-    r = requests.get(url=f'https://{netdata_host}/api/v1/chart')
+    r = requests.get(url=f'http://{netdata_host}/api/v1/chart')
     # The network chart is in kilobit/s
     rate = int(r.json().get('duration')) / 1000
     percent_rate = (rate / 1000) * 100
@@ -156,7 +156,7 @@ if __name__ == '__main__':
     while True:
         #in_rate = get_port_heat(LIBRENMS_PORT)
         # Moving to netdata to get the info
-        if_rate = get_rate('net.eth8')
+        if_rate = get_rate('10.250.1.1:19999', 'net.eth8')
         for _ in range(10):
             if if_rate <= 25:
                 green_cycle()
