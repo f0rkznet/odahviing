@@ -145,7 +145,8 @@ def get_port_heat(port):
     return in_rate
 
 def get_rate(netdata_host, chart):
-    r = requests.get(url=f'http://{netdata_host}/api/v1/chart')
+    d = {'chart': chart}
+    r = requests.get(url=f'http://{netdata_host}/api/v1/chart', params=d)
     # The network chart is in kilobit/s
     rate = int(r.json().get('duration')) / 1000
     percent_rate = (rate / 1000) * 100
