@@ -149,8 +149,8 @@ def get_rate(netdata_host, chart):
     r = requests.get(url=f'http://{netdata_host}/api/v1/data', params=d)
     # The network chart is in kilobit/s
     rate = int(r.json().get('data')[0][1]) / 1000
-    percent_rate = (rate / 1000)
-    return rate
+    percent_rate = (rate / 1000) * 100
+    return percent_rate
 
 
 if __name__ == '__main__':
