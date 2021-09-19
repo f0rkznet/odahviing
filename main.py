@@ -162,10 +162,10 @@ if __name__ == '__main__':
         for _ in range(1):
             if if_rate <= 25:
                 green_cycle()
-            elif if_rate <= 50 and in_rate > 25:
+            elif if_rate <= 50 and if_rate > 25:
                 blue_cycle()
-            elif if_rate <= 75 and in_rate > 50:
+            elif if_rate <= 75 and if_rate > 50:
                 chromatic_cycle()
-            elif if_rate <= 100 and in_rate > 75:
+            elif if_rate <= 100 and if_rate > 75:
                 red_cycle()
 
