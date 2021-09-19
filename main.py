@@ -158,7 +158,7 @@ if __name__ == '__main__':
         #in_rate = get_port_heat(LIBRENMS_PORT)
         # Moving to netdata to get the info
         if_rate = get_rate('10.250.1.1:19999', 'net.eth8')
-        for _ in range(10):
+        for _ in range(1):
             if if_rate <= 25:
                 green_cycle()
             elif if_rate <= 50 and in_rate > 25:
